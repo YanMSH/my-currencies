@@ -1,46 +1,40 @@
-# Getting Started with Create React App
+# Currency converter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Made as part of test task
 
-## Available Scripts
+You can find deploy [here](https://yanmsh-mycurrencies.netlify.app/)
 
-In the project directory, you can run:
+## APIs
+Two separate public APIs for crypto and fiat currencies.
+- **Crypto:** [CoinGecko](https://www.coingecko.com/en/api/documentation)
+- **Fiat:** [FreeCurrencyAPI](https://freecurrencyapi.com/docs)
 
-### `npm start`
+## Libraries
+- Project built on **React** with **TypeScript**
+- For state-management I've used **Redux-Toolkit**
+- For API requests I've used **RTK-Query**
+- I've also used **Material UI** for a nice look of application.
+- There are also some tests for the string parser made on **Jest**.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Pages and components
+### Header
+One header for all pages. In this header you can choose your *Base Currency*, that will be saved in the **localStorage**.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+There are two pages in my SPA: **Courses** and **Convert**.
+### Courses
+On **Courses** page all the courses of chosen *Base Currency*. If your currency is fiat there will be only fiat courses. If it's crypto - there will be only crypto courses.
+### Convert
+On **Convert** page you can convert fiat and cryptocurrencies into crypto or fiat currency and vice versa. There are text input in which you can type:
+> *15 usd in eth*
 
-### `npm test`
+and it will show you how many Ethereum you can buy for 15 US dollars. You also can type one currency and amount like this: 
+> '15 eur'
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+in this case app will show you how many base currencies you can buy for typed amount of money. In this particular case it will show you how many US dollars (default base currency) you can buy for 15 euros.
 
-### `npm run build`
+## Technical details
+- All requests are done through RTK-Query. In some cases the data from both API is mixing transforming and processing. For example in the Header component your can choose either fiat either cryptocurrency because there are sending two requests to both APIs, in response I recieve two lists of objects or strings, that I transform and connect in the one set of unique currency symbols.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- All requests to CoinGecko API can seem a little complicated because API requires **ID** of input currency and **symbol** of output currency. And lists of available inputs and outputs are not the same. In this case everytime I make a requests to CoinGecko API I should request the list of all currencies, in which I should find my currency ID form symbol and only then send a request for currency courses.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Both APIs are public so there are some restrictions - 5 requests per minute and 5000 requests per month.
