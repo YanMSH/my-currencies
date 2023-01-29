@@ -3,6 +3,8 @@
 Made as part of test task
 
 You can find deploy [here](https://yanmsh-mycurrencies.netlify.app/)
+![изображение](https://user-images.githubusercontent.com/89582326/215318801-3ec7e514-ce19-4d4e-a504-b506a596714d.png)
+![изображение](https://user-images.githubusercontent.com/89582326/215318831-fbece016-bf03-4bf5-930e-4d6d8e470c77.png)
 
 ## APIs
 Two separate public APIs for crypto and fiat currencies.
